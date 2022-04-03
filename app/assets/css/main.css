@@ -1,0 +1,208 @@
+.container {
+  position: relative;
+  margin: 0 auto;
+  min-height: 100vh;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  text-align: center;
+  padding:16px;
+}
+
+/* ヘッダー部分 */
+.ly_newMemo_heading{
+  text-align: left;
+  margin-bottom: 20px;
+}
+.el_newMemo_heading{
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #707070;
+  /* color: red; */
+}
+
+/* フォーム全体 */
+.ly_formArea{
+  border: 1px solid #BABABA;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.bl_formInner{
+  padding: 20px 15px 40px;
+  /* background-color: antiquewhite; */
+}
+
+
+/* タイトル・本文部分 */
+.bl_inputGroup{
+  display: block;
+}
+.ly_newMemoTitle{
+  margin-bottom: 20px;
+}
+.el_newMemoTitle {
+  font-family:
+    'Quicksand',
+    'Source Sans Pro',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #35495e;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  box-shadow:0px 1px 2px #ccc inset;
+}
+.ly_newMemoDes{
+  margin-bottom: 20px;
+}
+.el_newMemoDes{
+  box-shadow:0px 1px 2px #ccc inset;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+  /* width: 100%; */
+}
+
+/* カレンダー・チェックリスト */
+.bl_newMemoCheck{
+  margin-bottom: 40px;
+}
+.ly_newMemoDate{
+  margin-bottom: 20px;
+}
+.ly_newMemoImportant{
+  text-align: left;
+  position: relative;
+}
+
+/* 検索フィルター */
+.bl_search_button{
+  margin-bottom: 20px;
+  justify-content: flex-end;
+  display: flex;
+}
+.el_search_text{
+  border: 1px solid #696969;
+  border-right: none;
+  font-size: 0.75rem;
+  display: block;
+  color: #696969;
+  padding: 10px;
+}
+.el_search_text:last-child{
+  border-right: 1px solid #696969;
+}
+.el_search_text:hover,
+.el_search_text:focus{
+  color: #fff;
+  background-color: #696969;
+  cursor: pointer;
+  transition: .3s;
+}
+.el_search_text:active{
+  color: #fff;
+  background-color: #696969;
+  cursor: pointer;
+}
+
+/* メモ一覧 */
+.bl_memoList{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  border: 1px solid #c0c0c0;
+  border-radius: 5px;
+}
+.bl_memoList:last-child{
+  margin-bottom: 100px;
+}
+
+.ly_memo_title{
+  text-align: left;
+  font-size: 1.25rem;
+  background-color: #F4F4F4;
+  padding: 20px 0 20px 15px;
+  border-bottom: 1px dotted #BABABA;
+}
+.el_memo_title{
+  color: #333;
+}
+.bl_memoCheck{
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #bababa;
+}
+.ly_memoDeadline{
+  background-color: #F4F4F4;
+  border-radius: 5px;
+  padding: 5px 15px;
+  box-shadow: 0px 1px 4px #ccc;
+}
+.el_memoDeadline{
+  
+}
+.ly_memoImportant{
+  padding: 5px 15px;
+  background-color: #FD469B;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0px 1px 4px #ccc;
+}
+.el_memoImportant{
+  color: #fff;
+}
+.ly_memoDes{
+  padding: 20px 15px;
+  text-align: left;
+}
+.el_memoDes{
+
+}
+
+/* トップに戻るボタン */
+.bl_topBtn{
+  display: block;
+  text-decoration: none;
+  background-color: #53B9C6;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  box-shadow: 0px 3px 6px #ccc;
+  border: 1px solid #53B9C6;
+  transition: .3s;
+}
+.bl_topBtn:hover{
+  text-decoration: none;
+  color: #53B9C6;
+  background-color: #fff;
+  transition: .3s;
+}
+.el_topBtn{
+  padding: 17px 30px;
+  color: #fff;
+  font-weight: bold;
+  display: block;
+}
+.el_topBtn:hover{
+  color: #53B9C6;
+}
+
+
+
+
+
+
+
+
+
