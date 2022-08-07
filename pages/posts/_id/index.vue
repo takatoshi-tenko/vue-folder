@@ -1,9 +1,9 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">{{ loadedPost.titlle }}</h1>
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on {{ loadedPost.updateDate }}</div>
+        <div class="post-detail">Last updated on {{ loadedPost.updateDate | data }}</div>
         <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
       <p class="post-content">{{ loadedPost.content }}</p>
@@ -14,26 +14,26 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   asyncData(context) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: {
-          id: '1',
-          title: 'First post (ID: ' + context.route.params.id + ')',
-          previewText: 'this is our first post!',
-          author: 'tenko takatoshi',
-          updateDate: new Date(),
-          content: 'some dummy text which is definitely hogehogehoge',
-          thumbnail:
-          'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
+    if (context.payload) {
+      return {
+        loadedPost: context.payload.postData
+      }
+    }
+    return context.app.$axios.$get('/posts/' + context.params.id + '.json')
+      .then(data => {
+        return {
+          loadedPost: data
         }
-      });
-    }, 1000);
+      })
+      .catch(e => context.error(e))
   },
-}
-
+  head: {
+    title: 'A Blog Post'
+  }
+};
 </script>
 
 <style scoped>
