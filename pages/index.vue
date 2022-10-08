@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1 class="heading">Takatoshi Tenko</h1>
+    <p>今から学習アプリを作っていきます。</p>
+    <p>今から学習アプリを作っていきます。</p>
 
     <Tutorial />
   </div>
