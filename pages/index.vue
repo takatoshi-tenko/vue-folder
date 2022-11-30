@@ -1,10 +1,12 @@
 <template>
   <div>
+    <Header />
     <h1 class="heading">Takatoshi Tenko</h1>
-    <p>今から学習アプリを作っていきます。</p>
+    <p class="heading__description">今から学習アプリを作っていきます。</p>
     <p>今から学習アプリを作っていきます。</p>
 
     <Tutorial />
+    <Footer />
   </div>
 </template>
 
@@ -23,5 +25,8 @@ export default Vue.extend({
   font-weight: bold;
   font-size: 24px;
   color: skyblue;
+  &__description{
+    color: green;
+  }
 }
 </style>
