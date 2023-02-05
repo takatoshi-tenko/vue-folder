@@ -5,7 +5,7 @@
     </router-link>
     <br><br>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" v-for="message in messages">
+      <li class="list-group-item" v-for="message in messages" :key="message">
         <div>
           {{ message.name }}
         </div>

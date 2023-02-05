@@ -3,7 +3,7 @@
     <form>
       <div class="form-group">
         <label>ユーザ名</label>
-        <input v-model="form.name" type="text" class="form-control" readonly>
+        <input v-model="form.name" type="text" class="form-control">
       </div>
       <div class="form-group">
         <textarea v-model="form.message" rows="3" class="form-control" />
@@ -27,11 +27,11 @@
       }
     },
     mounted() {
-      this.$fb.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.form.name = user.displayName
-        }
-      })
+      // this.$fb.auth().onAuthStateChanged((user) => {
+      //   if (user) {
+      //     this.form.name = user.displayName
+      //   }
+      // })
     },
     methods: {
       async submit() {
