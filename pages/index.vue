@@ -1,7 +1,8 @@
 <template>
   <div>
+    <Hello/>
     <router-link class="btn btn-light" to="/form">
-      投稿画面
+      投稿画面aaaa
     </router-link>
     <br><br>
     <ul class="list-group list-group-flush">
@@ -18,7 +19,9 @@
 </template>
 
 <script>
+import Hello from '../components/Hello.vue'
   export default {
+  components: { Hello },
     data() {
       return {}
     },
