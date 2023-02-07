@@ -2,7 +2,7 @@
   <div>
     <Hello/>
     <router-link class="btn btn-light" to="/form">
-      投稿画面aaaafjsakfjsaf;lajsf
+      投稿画面
     </router-link>
     <br><br>
     <ul class="list-group list-group-flush">
