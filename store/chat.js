@@ -8,6 +8,10 @@ export const state = () => {
       {
         name: "yamada",
         message: "hello world"
+      },
+      {
+        name: "saito",
+        message: "hello world!!!"
       }
     ]
   }

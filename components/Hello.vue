@@ -15,10 +15,10 @@
       <input type="text" name="fight-message" placeholder="ここに今日の一言を入力" required>
       <input type="submit" name="submit_message" value="送信">
     </form>
-    <form method="post" name="form1" action="link.php">
+    <!-- <form method="post" name="form1" action="link.php">
       <input type="hidden" name="user_name" value="名前">
       <a href="javascript:form1.submit()">リンク名</a>
-    </form>
+    </form> -->
   </div>
 </template>
 

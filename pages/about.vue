@@ -2,6 +2,7 @@
   <div>
     <h1>Aboutページ</h1>
     <h2>{{ subtitle }}</h2>
+    <p class="article-description">これはテストです。</p>
   </div>
 </template>
 
@@ -14,3 +15,11 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.article {
+  &-description {
+    color: red;
+  }
+}
+</style>

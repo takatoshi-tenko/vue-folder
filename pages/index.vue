@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Hello/>
+    <!-- <Hello/> -->
     <router-link class="btn btn-light" to="/form">
       投稿画面
     </router-link>
