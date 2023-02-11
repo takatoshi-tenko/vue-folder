@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1>
+    <h1 class="hello-title">
       ようこそFight appへ！
     </h1>
     <div>
       <h2>記事一覧</h2>
       <ul>
-        <li v-for="post in posts" :key="post.id">
+        <!-- <li v-for="post in posts" :key="post.id">
           {{ post.title }}
-        </li>
+        </li> -->
       </ul>
     </div>
     <form action="/" method="POST">
