@@ -1,0 +1,51 @@
+@use "sass:list";
+@use "sass:map";
+@use "variables";
+@use "mixin";
+
+// @each $yakuhan in map.get(variables.$fonts, "YakuHanJP") {
+// 	@font-face {
+// 		font-family: "YakuHanJP";
+// 		font-style: normal;
+// 		font-weight: #{list.nth($yakuhan, 2)};
+// 		src: url("assets/fonts/YakuHanJP/YakuHanJP-#{list.nth($yakuhan, 1)}.eot");
+// 		src: url("assets/fonts/YakuHanJP/YakuHanJP-#{list.nth($yakuhan, 1)}.woff2") format("woff2"),
+// 			url("assets/fonts/YakuHanJP/YakuHanJP-#{list.nth($yakuhan, 1)}.woff") format("woff");
+// 	}
+// }
+
+html {
+	min-height: 100%;
+}
+body {
+	min-height: 100%;
+	position: relative;
+	font-family: variables.$base-font-family;
+	//line-height: 1.5;
+	//letter-spacing: 0.05em;
+  font-size: 62.5%;
+	color: map.get(variables.$colors, 'font');
+	counter-reset: number;
+	background: #F2F2F2;
+}
+
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+p {
+	margin-bottom: 20px;
+	letter-spacing: 0.1em;
+	font-size: 14px;
+	line-height: 1.7;
+	@include mixin.mq('m') {
+		font-size: 16px;
+	}
+}

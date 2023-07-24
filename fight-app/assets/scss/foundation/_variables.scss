@@ -1,0 +1,48 @@
+@use "sass:list";
+@use "sass:map";
+
+$colors: (
+	"font": #000,
+);
+
+$transition-time: .4s;
+
+$sizes: xs, s, m, l, xl;
+
+$containers: (
+	list.nth($sizes, 1): 350px,
+	list.nth($sizes, 2): 640px,
+	list.nth($sizes, 3): 1024px,
+	list.nth($sizes, 4): 1160px,
+	list.nth($sizes, 5): 1600px,
+	'page': 860px
+);
+
+$breakpoints: (
+	list.nth($sizes, 1): map.get($containers, list.nth($sizes, 1)),
+	list.nth($sizes, 2): map.get($containers, list.nth($sizes, 2)),
+	list.nth($sizes, 3): map.get($containers, list.nth($sizes, 3)),
+	list.nth($sizes, 4): map.get($containers, list.nth($sizes, 4)),
+	list.nth($sizes, 5): map.get($containers, list.nth($sizes, 5)),
+);
+
+$base-font-family: YakuHanJP,"游ゴシック Medium",YuGothic,YuGothicM,"Hiragino Kaku Gothic ProN","Helvetica Neue",メイリオ,Meiryo,serif;
+
+$accent-family: copperplate, serif;
+
+$fonts: (
+	"YakuHanJP": (
+		[Thin], 100,
+		[Light], 200,
+		[DemiLight], 300,
+		[Regular], 400,
+		[Medium], 500,
+		[Bold], 700,
+		[Black], 900
+	),
+	"CrimsonText": (
+		[Regular], 400,
+		[SemiBold], 600,
+		[Bold], 700,
+	)
+);
