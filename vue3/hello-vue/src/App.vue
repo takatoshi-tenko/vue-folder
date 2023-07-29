@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const pMsg = ref('イベント前（ここをクリック）')
-const pBgColorEvent = ref('white')
-const onPClickWithEvent = (bgColor: string, event: MouseEvent): void => {
-  ;(pBgColorEvent.value = bgColor), (pMsg.value = event.timeStamp.toString())
+const msg = ref('未送信')
+const onFormSubmit = (): void => {
+  msg.value = '送信されました'
 }
 </script>
 
 <template>
   <div>
-    <p @click="onPClickWithEvent('green', $event)" :style="{ backgroundColor: pBgColorEvent }">
-      {{ pMsg }}
-    </p>
+    <form action="#" @submit.prevent="onFormSubmit">
+      <input type="text" required />
+      <button type="submit">送信</button>
+    </form>
+    <p>{{ msg }}</p>
   </div>
 </template>
