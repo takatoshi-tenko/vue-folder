@@ -1,25 +1,9 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const cocktailDataListInit: Cocktail[] = [
-  { id: 2345, name: 'ホワイトレディ', price: 1200 },
-  { id: 4412, name: 'ブルーハワイ', price: 1500 },
-  { id: 3364, name: 'ニューヨーク', price: 1100 },
-  { id: 7768, name: 'マティーニ', price: 1500 }
-]
-const cocktailDataList = ref(cocktailDataListInit)
-
-interface Cocktail {
-  id: number
-  name: string
-  price: number
-}
-</script>
-
 <template>
-  <div>
-    <li v-for="cocktailItem in cocktailDataList" :key="cocktailItem.id">
-      {{ cocktailItem.name }}の値段は{{ cocktailItem.price }}
-    </li>
-  </div>
+	<ul>
+		<li
+			v-for="r in 5"
+			v-bind:key="r">
+			半径{{r}}の円の円周: {{2 * r * 3.14}}
+		</li>
+	</ul>
 </template>
