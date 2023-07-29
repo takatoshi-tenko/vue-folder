@@ -1,25 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref } from 'vue'
 
-const showOrNot = computed((): boolean => {
-  let showOrNot = false
-  const rand = Math.round(Math.random() * 100)
-  if (rand >= 50) {
-    showOrNot = true
-  }
-  return showOrNot
-})
+const cocktailListInit: string[] = ['ホワイトレディ', 'ブルーハワイ', 'ニューヨーク']
+const cocktailList = ref(cocktailListInit)
 </script>
 
 <template>
   <div>
-    <section>
-      v-ifを利用
-      <p v-if="showOrNot">条件に合致したので表示</p>
-    </section>
-    <section>
-      v-showを利用
-      <p v-show="showOrNot">条件に合致したので表示</p>
-    </section>
+    <ul>
+      <li v-for="cocktailName in cocktailList" v-bind:key="cocktailName">
+        {{ cocktailName }}
+      </li>
+    </ul>
+    <ul>
+      <li v-for="(cocktailName, index) in cocktailList" v-bind:key="cocktailName">
+        {{ cocktailName }}(インデックス{{ index }})
+      </li>
+    </ul>
   </div>
 </template>
