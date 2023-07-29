@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue"
-
-const isSendButtonDisabled = ref(false)
+import { ref } from 'vue'
+const widthOrHeight = ref('Height')
+const widthOrHeightValue = ref(100)
 </script>
 
 <template>
   <div>
-    <p><button type="button" :disabled="isSendButtonDisabled">送信</button></p>
+    <p><img src="./assets/logo.svg" alt="VueLogo" :[widthOrHeight]="widthOrHeightValue" /></p>
   </div>
 </template>
