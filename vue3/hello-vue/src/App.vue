@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const pBgColor = ref('white')
-const onPClick = (bgColor: string): void => {
-  pBgColor.value = bgColor
+const pMsg = ref('イベント前（ここをクリック）')
+const pBgColorEvent = ref('white')
+const onPClickWithEvent = (bgColor: string, event: MouseEvent): void => {
+  ;(pBgColorEvent.value = bgColor), (pMsg.value = event.timeStamp.toString())
 }
 </script>
 
 <template>
   <div>
-    <p @click="onPClick('red')" :style="{ backgroundColor: pBgColor }">
-      ここをクリックすると背景色が変わります。
+    <p @click="onPClickWithEvent('green', $event)" :style="{ backgroundColor: pBgColorEvent }">
+      {{ pMsg }}
     </p>
   </div>
 </template>
