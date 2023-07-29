@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
-const number = ref(80)
 const showOrNot = computed((): boolean => {
   let showOrNot = false
   const rand = Math.round(Math.random() * 100)
@@ -14,8 +13,13 @@ const showOrNot = computed((): boolean => {
 
 <template>
   <div>
-    <p v-if="number >= 50">条件に合致したので表示①</p>
-    <p v-if="Math.round(Math.random() * 100) >= 50">条件に合致したので表示②</p>
-    <p v-if="showOrNot">条件に合致したので表示③</p>
+    <section>
+      v-ifを利用
+      <p v-if="showOrNot">条件に合致したので表示</p>
+    </section>
+    <section>
+      v-showを利用
+      <p v-show="showOrNot">条件に合致したので表示</p>
+    </section>
   </div>
 </template>
