@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const htmlStr = ref('<a href="https://vuejs.org//">Vuejsのトップページ</a>')
+const number = ref(80)
+const showOrNot = computed((): boolean => {
+  let showOrNot = false
+  const rand = Math.round(Math.random() * 100)
+  if (rand >= 50) {
+    showOrNot = true
+  }
+  return showOrNot
+})
 </script>
 
 <template>
   <div>
-    {{ htmlStr }}
-    <section v-html="htmlStr"></section>
-    <div v-pre>
-      <p v-on:click="showHello">{{ hello! }}</p>
-    </div>
+    <p v-if="number >= 50">条件に合致したので表示①</p>
+    <p v-if="Math.round(Math.random() * 100) >= 50">条件に合致したので表示②</p>
+    <p v-if="showOrNot">条件に合致したので表示③</p>
   </div>
 </template>
