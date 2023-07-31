@@ -3,8 +3,12 @@ import { ref, watch } from 'vue'
 
 const cocktailNo = ref(1)
 const priceMsg = ref('')
-watch(cocktailNo, (): void => {
-  priceMsg.value = getCocktailInfo(cocktailNo.value)
+watch(cocktailNo, (newVal: number, oldVal: number): void => {
+  let msg = '前のカクテル: '
+  msg += getCocktailInfo(oldVal)
+  msg += '現在のカクテル'
+  msg += getCocktailInfo(newVal)
+  priceMsg.value = msg
 })
 
 setInterval((): void => {
@@ -36,6 +40,7 @@ function getCocktailInfo(cocktailNo: number): string {
 <template>
   <div>
     <p>現在のカクテル番号：{{ cocktailNo }}</p>
+    <br />
     <p>{{ priceMsg }}</p>
   </div>
 </template>
