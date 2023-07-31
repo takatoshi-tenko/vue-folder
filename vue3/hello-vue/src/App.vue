@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 
 const cocktailNo = ref(1)
 const priceMsg = ref('')
-watchEffect((): void => {
+watch(cocktailNo, (): void => {
   priceMsg.value = getCocktailInfo(cocktailNo.value)
 })
 
