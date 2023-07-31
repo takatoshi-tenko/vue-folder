@@ -1,46 +1,52 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import {
+  ref,
+  computed,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onRenderTracked,
+  onRenderTriggered
+} from 'vue'
+import type { DebuggerEvent } from 'vue'
 
-const cocktailNo = ref(1)
-const priceMsg = ref('')
-watch(cocktailNo, (newVal: number, oldVal: number): void => {
-  let msg = '前のカクテル: '
-  msg += getCocktailInfo(oldVal)
-  msg += '現在のカクテル'
-  msg += getCocktailInfo(newVal)
-  priceMsg.value = msg
+const heightInit = Math.round(Math.random() * 10)
+const widthInit = Math.round(Math.random() * 10)
+const height = ref(heightInit)
+const width = ref(widthInit)
+const area = computed((): number => {
+  return height.value * width.value
 })
-
-setInterval((): void => {
-  cocktailNo.value = Math.round(Math.random() * 3) + 1
-}, 1000)
-
-interface Cocktail {
-  id: number
-  name: string
-  price: number
+const change = (): void => {
+  height.value = Math.round(Math.random() * 10)
+  width.value = Math.round(Math.random() * 10)
 }
-
-function getCocktailInfo(cocktailNo: number): string {
-  const cocktailDataListInit = new Map<number, Cocktail>()
-  cocktailDataListInit.set(1, { id: 1, name: 'ホワイトレディ', price: 1200 })
-  cocktailDataListInit.set(2, { id: 2, name: 'ブルーハワイ', price: 1500 })
-  cocktailDataListInit.set(3, { id: 3, name: 'ニューヨーク', price: 1100 })
-  cocktailDataListInit.set(4, { id: 4, name: 'マティーニ', price: 1500 })
-
-  const cocktail = cocktailDataListInit.get(cocktailNo)
-  let msg = '該当カクテルはありません。'
-  if (cocktail != undefined) {
-    msg = `該当するカクテルは${cocktail.name}で、価格は${cocktail.price}円です。`
-  }
-  return msg
-}
+onBeforeMount((): void => {
+  console.log(`beforeMount called: ${height.value} * ${width.value}`)
+})
+onMounted((): void => {
+  console.log(`mounted called: ${height.value} * ${width.value}`)
+})
+onBeforeUpdate((): void => {
+  console.log(`beforeUpdate called: ${height.value} * ${width.value}`)
+})
+onUpdated((): void => {
+  console.log(`updated called: ${height.value} * ${width.value}`)
+})
+onRenderTracked((event: DebuggerEvent): void => {
+  console.log(`renderTracked called: ${height.value} * ${width.value}`)
+  console.log(event)
+})
+onRenderTriggered((event: DebuggerEvent): void => {
+  console.log(`renderTriggered called: ${height.value} * ${width.value}`)
+  console.log(event)
+})
 </script>
 
 <template>
   <div>
-    <p>現在のカクテル番号：{{ cocktailNo }}</p>
-    <br />
-    <p>{{ priceMsg }}</p>
+    <p>縦が{{ height }}、横が{{ width }}の長方形の面積は{{ area }}</p>
+    <button v-on:click="change">値を変更</button>
   </div>
 </template>
