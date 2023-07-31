@@ -1,29 +1,26 @@
-<script lang="ts">
-import { defineComponent, reactive, computed, toRefs } from 'vue'
-
-export default defineComponent({
-  name: 'App',
-  setup() {
-    const data = reactive({
-      PI: 3.14,
-      radius: Math.round(Math.random() * 10)
-    })
-
-    const area = computed((): number => {
-      return data.radius * data.radius * data.PI
-    })
-
-    setInterval((): void => {
-      data.radius = Math.round(Math.random() * 3) + 1
-    }, 1000)
-    return {
-      ...toRefs(data),
-      area
-    }
-  }
-})
+<script setup lang="ts">
+import OneSection from './components/OneSection.vue'
 </script>
 
 <template>
-  <p>半径{{ radius }}の円の面積を円周率{{ PI }}で計算すると、{{ area }}</p>
+  <div>
+    <h1>コンポーネント基礎</h1>
+    <section>
+      <h2>コンポーネント1個</h2>
+      <OneSection />
+    </section>
+    <section>
+      <h2>コンポーネントが複数</h2>
+      <OneSection />
+      <OneSection />
+      <OneSection />
+    </section>
+  </div>
 </template>
+
+<style>
+section {
+	border: blue 1px solid;
+	margin: 10px;
+}
+</style>
