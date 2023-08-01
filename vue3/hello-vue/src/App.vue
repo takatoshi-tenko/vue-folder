@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import WithModel from './components/WithModel.vue'
+import OneInfo from './components/OneInfo.vue'
 </script>
 
 <template>
   <div>
-    <h1>コンポーネントの独立性</h1>
+    <h1>Props基礎</h1>
     <section>
-      <h2>v-modelを含むコンポーネント</h2>
-      <WithModel />
-      <WithModel />
+      <h2>属性に直接記述</h2>
+      <OneInfo title="Propsの利用" content="子コンポーネントにデータを渡すにはPropsを利用する。" />
     </section>
   </div>
 </template>
