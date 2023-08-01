@@ -1,23 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import OneInfo from './components/OneInfo.vue'
+import { ref, computed } from 'vue'
+import OneMember from './components/OneMember.vue'
 
-const weatherListInit = new Map<number, Weather>()
-weatherListInit.set(1, { id: 1, title: '今日の天気', content: '今日は1日中、晴れでしょう' })
-weatherListInit.set(2, { id: 2, title: '明日の天気', content: '明日は1日中、雨でしょう' })
-weatherListInit.set(3, { id: 3, title: '明後日の天気', content: '明後日は1日中、雪でしょう' })
-const weatherList = ref(weatherListInit)
-interface Weather {
+const memberListInit = new Map<number, Member>()
+memberListInit.set(33456, {
+  id: 33456,
+  name: '田中太郎',
+  email: 'box@example.com',
+  points: 35,
+  note: '初回入会特典あり'
+})
+memberListInit.set(47783, { id: 47783, name: '鈴木二郎', email: 'mue@example.com', points: 53 })
+const memberList = ref(memberListInit)
+
+const totalPoints = computed((): number => {
+  let total = 0
+  for (const member of memberList.value.values()) {
+    total += member.points
+  }
+  return total
+})
+
+interface Member {
   id: number
-  title: string
-  content: string
+  name: string
+  email: string
+  points: number
+  note?: string
 }
 </script>
 
 <template>
   <div>
-    <h1>Props基礎</h1>
-    <OneInfo v-for="[id, weather] in weatherList" :key="id" :content="weather.content" />
+    <h1>会員リスト</h1>
+    <p>全会員の保有ポイント合計：{{ totalPoints }}</p>
+    <OneMember
+      v-for="[id, member] in memberList"
+      :key="id"
+      :name="member.name"
+      :email="member.email"
+      :points="member.points"
+      :note="member.note"
+    />
   </div>
 </template>
 
