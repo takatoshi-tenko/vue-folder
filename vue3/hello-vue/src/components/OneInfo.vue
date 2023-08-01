@@ -1,23 +1,21 @@
 <script setup lang="ts">
 interface Props {
-  title: string
-  content: string
+	title: string;
+	content: string;
 }
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <template>
-  <div>
-    <section class="box">
-      <h4>{{ title }}</h4>
-      <p>{{ content }}</p>
-    </section>
-  </div>
+	<section class="box">
+		<h4>{{title}}</h4>
+		<p>{{content}}</p>
+	</section>
 </template>
 
-<style>
-  .box {
-    border: green 1px solid;
-    margin: 10px;
-  }
+<style scoped>
+.box {
+	border: green 1px solid;
+	margin: 10px;
+}
 </style>
