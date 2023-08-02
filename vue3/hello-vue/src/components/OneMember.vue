@@ -1,64 +1,50 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
+import type { Member } from '../interfaces'
 
+//Propsインターフェースの定義。
 interface Props {
   id: number
-  name: string
-  email: string
-  points: number
-  note?: string
 }
-
-interface Emits {
-  (event: 'incrementPoint', points: number): void
-}
-
+//Propsオブジェクトの設定。
 const props = defineProps<Props>()
-const emit = defineEmits<Emits>()
+//会員情報リストをインジェクト。
+const memberList = inject('memberList') as Map<number, Member>
+//該当する会員情報の取得。
+const member = computed((): Member => {
+  return memberList.get(props.id) as Member
+})
+//Propsのnoteを加工する算出プロパティ。
 const localNote = computed((): string => {
-  let localNote = props.note
+  let localNote = member.value.note
   if (localNote == undefined) {
     localNote = '--'
   }
   return localNote
 })
-
-const onInput = (event: Event): void => {
-  const element = event.target as HTMLInputElement
-  const inputPoints = Number(element.value)
-  emit('update:points', inputPoints)
-}
-
-const pointUp = (): void => {
-  emit('incrementPoint', props.id)
-}
 </script>
 
 <template>
-  <div>
-    <section>
-      <h4>{{ name }}さんの情報</h4>
-      <dl>
-        <dt>ID</dt>
-        <dd>{{ id }}</dd>
-        <dt>メールアドレス</dt>
-        <dd>{{ email }}</dd>
-        <dt>保有ポイント</dt>
-        <dd>
-          <input type="number" v-bind:value="points" v-on:input="onInput" />
-        </dd>
-        <dt>備考</dt>
-        <dd>{{ localNote }}</dd>
-      </dl>
-      <br />
-      <button @click="pointUp">ポイント加算</button>
-    </section>
-  </div>
+  <section class="box">
+    <h4>{{ member.name }}さんの情報</h4>
+    <dl>
+      <dt>ID</dt>
+      <dd>{{ id }}</dd>
+      <dt>メールアドレス</dt>
+      <dd>{{ member.email }}</dd>
+      <dt>保有ポイント</dt>
+      <dd>
+        <input type="number" v-model.number="member.points" />
+      </dd>
+      <dt>備考</dt>
+      <dd>{{ localNote }}</dd>
+    </dl>
+  </section>
 </template>
 
 <style scoped>
 .box {
-	border: green 1px solid;
-	margin: 10px;
+  border: green 1px solid;
+  margin: 10px;
 }
 </style>
