@@ -10,18 +10,25 @@ interface Props {
 }
 
 interface Emits {
-  (event: 'incrementPoint', id: number): void
+  (event: 'incrementPoint', points: number): void
 }
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
-// const localNote = computed((): string => {
-//   let localNote = props.note
-//   if (localNote == undefined) {
-//     localNote = '--'
-//   }
-//   return localNote
-// })
+const localNote = computed((): string => {
+  let localNote = props.note
+  if (localNote == undefined) {
+    localNote = '--'
+  }
+  return localNote
+})
+
+const onInput = (event: Event): void => {
+  const element = event.target as HTMLInputElement
+  const inputPoints = Number(element.value)
+  emit('update:points', inputPoints)
+}
+
 const pointUp = (): void => {
   emit('incrementPoint', props.id)
 }
@@ -37,7 +44,9 @@ const pointUp = (): void => {
         <dt>メールアドレス</dt>
         <dd>{{ email }}</dd>
         <dt>保有ポイント</dt>
-        <dd>{{ points }}</dd>
+        <dd>
+          <input type="number" v-bind:value="points" v-on:input="onInput" />
+        </dd>
         <dt>備考</dt>
         <dd>{{ localNote }}</dd>
       </dl>
@@ -46,3 +55,10 @@ const pointUp = (): void => {
     </section>
   </div>
 </template>
+
+<style scoped>
+.box {
+	border: green 1px solid;
+	margin: 10px;
+}
+</style>
