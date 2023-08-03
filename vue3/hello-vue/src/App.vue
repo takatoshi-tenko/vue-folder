@@ -2,31 +2,22 @@
 import { ref } from 'vue'
 import OneSection from './components/OneSection.vue'
 
-const taroProblemsInit: string[] = ['電話が通じません。', '留守です。']
-const taro = ref('田中太郎')
-const taroProblems = ref(taroProblemsInit)
-const jiro = ref('鈴木二郎')
+// const taroProblemsInit: string[] = ['電話が通じません。', '留守です。']
+// const taro = ref('田中太郎')
+// const taroProblems = ref(taroProblemsInit)
+// const jiro = ref('鈴木二郎')
 </script>
 <template>
   <section>
-    <OneSection v-bind:name="taro">
-      <template v-slot:default>
-        <p>問題発生</p>
-      </template>
-      <template v-slot:detail>
-        <ul>
-          <li v-for="problem in taroProblems" v-bind:key="problem">
-            {{ problem }}
-          </li>
-        </ul>
+    <OneSection>
+      <template v-slot="slotProps">
+        <dl>
+          <dt>名前</dt>
+          <dd>{{ slotProps.memberInfo.name }}</dd>
+          <dt>状況</dt>
+          <dd>{{ slotProps.memberInfo.state }}</dd>
+        </dl>
       </template>
     </OneSection>
-    <OneSection v-bind:name="jiro">
-      <template #default>
-        <p>微妙な問題発生</p>
-      </template>
-    </OneSection>
-    <OneSection v-bind:name="jiro" />
-    <OneSection v-bind:name="jiro" />
   </section>
 </template>
