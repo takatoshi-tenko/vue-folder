@@ -1,23 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import OneSection from './components/OneSection.vue'
+import Input from './components/Input.vue'
+import Radio from './components/Radio.vue'
+import Select from './components/Select.vue'
 
-// const taroProblemsInit: string[] = ['電話が通じません。', '留守です。']
-// const taro = ref('田中太郎')
-// const taroProblems = ref(taroProblemsInit)
-// const jiro = ref('鈴木二郎')
+const currentComp = ref(Input)
+const currentCompName = ref('Input')
+const compList = [Input, Radio, Select]
+const compNameList: string[] = ['Input', 'Radio', 'Select']
+let currentCompIndex = 0
+const switchComp = (): void => {
+  currentCompIndex++
+  if (currentCompIndex >= 3) {
+    currentCompIndex = 0
+  }
+  currentComp.value = compList[currentCompIndex]
+  currentCompName.value = compNameList[currentCompIndex]
+}
 </script>
+
 <template>
-  <section>
-    <OneSection>
-      <template v-slot="slotProps">
-        <dl>
-          <dt>名前</dt>
-          <dd>{{ slotProps.memberInfo.name }}</dd>
-          <dt>状況</dt>
-          <dd>{{ slotProps.memberInfo.state }}</dd>
-        </dl>
-      </template>
-    </OneSection>
-  </section>
+  <div>
+    <p>コンポーネント名: {{ currentCompName }}</p>
+    <KeepAlive>
+      <component v-bind:is="currentComp" />
+    </KeepAlive>
+    <button v-on:click="switchComp">切り替え</button>
+  </div>
 </template>
