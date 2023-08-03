@@ -10,7 +10,9 @@ defineProps<Props>()
   <div>
     <section class="box">
       <h1>{{ name }}さんの状況</h1>
-      <slot />
+      <slot>
+        <p>問題ありません。</p>
+      </slot>
     </section>
   </div>
 </template>
