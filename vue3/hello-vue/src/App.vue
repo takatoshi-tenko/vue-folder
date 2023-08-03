@@ -7,17 +7,26 @@ const taro = ref('田中太郎')
 const taroProblems = ref(taroProblemsInit)
 const jiro = ref('鈴木二郎')
 </script>
-
 <template>
   <section>
-    <h2>Slotの利用</h2>
-    <OneSection :name="taro">
-      <ul>
-        <li v-for="problem in taroProblems" :key="problem">
-          {{ problem }}
-        </li>
-      </ul>
+    <OneSection v-bind:name="taro">
+      <template v-slot:default>
+        <p>問題発生</p>
+      </template>
+      <template v-slot:detail>
+        <ul>
+          <li v-for="problem in taroProblems" v-bind:key="problem">
+            {{ problem }}
+          </li>
+        </ul>
+      </template>
     </OneSection>
-    <OneSection :name="jiro" />
+    <OneSection v-bind:name="jiro">
+      <template #default>
+        <p>微妙な問題発生</p>
+      </template>
+    </OneSection>
+    <OneSection v-bind:name="jiro" />
+    <OneSection v-bind:name="jiro" />
   </section>
 </template>
