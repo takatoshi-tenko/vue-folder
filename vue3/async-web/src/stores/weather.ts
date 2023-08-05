@@ -43,6 +43,23 @@ export const useWeatherStore = defineStore({
     },
     async receiveWeatherInfo(id: string) {
       this.selectedCity = this.cityList.get(id) as City;
+      const weatherInfoUrl = "https://api.openweathermap.org/geo/1.0/direct";
+      const params: {
+        q: string;
+        appId: string;
+      } = {
+        q: this.selectedCity.q,
+        appId: "84c24117ac7cbebfe1b2825e73829b62",
+      };
+      const queryParams = new URLSearchParams(params);
+      const urlFull = `${weatherInfoUrl}?${queryParams}`;
+      console.log(urlFull);
+      const response = await fetch(urlFull);
+      const weatherInfoJSON = await response.json();
+      const weatherArray = weatherInfoJSON.weather;
+      const weather = weatherArray[0];
+      this.weatherDescription = weather.description;
+      this.isLoading = false;
     },
   },
 });

@@ -32,6 +32,8 @@ const weatherDescription = computed((): string => {
       <h2>{{ selectedCity.name }}の天気</h2>
       <p>{{ weatherDescription }}</p>
     </section>
-    <p>リスト<RouterLInk :to="{ name: 'CityList' }">に戻る</RouterLInk></p>
+    <p>
+      リストに<RouterLink v-bind:to="{ name: 'CityList' }">戻る</RouterLink>
+    </p>
   </div>
 </template>
