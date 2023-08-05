@@ -12,6 +12,9 @@ const doubleCount = computed((): number => {
 const onIncrementClick = () => {
   counterStore.incrementCount();
 };
+const resetIncrementClick = () => {
+  counterStore.$reset();
+};
 </script>
 
 <template>
@@ -19,5 +22,6 @@ const onIncrementClick = () => {
     <p>現在のポイント: {{ count }}</p>
     <p>現在のポイントのさらに2倍: {{ doubleCount }}</p>
     <button @click="onIncrementClick">加算</button>
+    <button @click="resetIncrementClick">リセットする</button>
   </div>
 </template>
