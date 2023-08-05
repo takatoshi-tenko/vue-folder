@@ -3,6 +3,7 @@ import type { Member } from "@/interfaces";
 
 interface State {
   memberList: Map<number, Member>;
+  isLoading: boolean;
 }
 
 let _database: IDBDatabase;
@@ -36,6 +37,7 @@ export const useMembersStore = defineStore({
   state: (): State => {
     return {
       memberList: new Map<number, Member>(),
+      isLoading: true,
     };
   },
   getters: {
@@ -50,19 +52,53 @@ export const useMembersStore = defineStore({
     },
   },
   actions: {
-    prepareMemberList(): void {
-      let memberList = new Map<number, Member>();
-      const memberListJSONStr = sessionStorage.getItem("memberList");
-      if (memberListJSONStr != undefined) {
-        const memberListJSON = JSON.parse(memberListJSONStr);
-        memberList = new Map<number, Member>(memberListJSON);
-      }
-      this.memberList = memberList;
+    async prepareMemberList(): Promise<boolean> {
+      const database = await getDatabase();
+      const promise = new Promise<boolean>((resolve, reject) => {
+        const transaction = database.transaction("members", "readonly");
+        const objectStore = transaction.objectStore("members");
+        const memberList = new Map<number, Member>();
+        const request = objectStore.openCursor();
+        request.onsuccess = (event) => {
+          const target = event.target as IDBRequest;
+          const cursor = target.result as IDBCursorWithValue;
+          if (cursor) {
+            const id = cursor.key as number;
+            const member = cursor.value as Member;
+            memberList.set(id, member);
+            cursor.continue();
+          }
+        };
+        transaction.oncomplete = () => {
+          this.memberList = memberList;
+          this.isLoading = false;
+          resolve(true);
+        };
+        transaction.onerror = (event) => {
+          console.log("ERROR: データ取得に失敗", event);
+          reject(new Error("ERROR: データ取得に失敗"));
+        };
+      });
+      return promise;
     },
-    insertMember(member: Member): void {
-      this.memberList.set(member.id, member);
-      const memberListJSONStr = JSON.stringify([...this.memberList]);
-      sessionStorage.setItem("memberList", memberListJSONStr);
+    async insertMember(member: Member): Promise<boolean> {
+      const memberAdd: Member = {
+        ...member,
+      };
+      const database = await getDatabase();
+      const promise = new Promise<boolean>((resolve, reject) => {
+        const transaction = database.transaction("members", "readwrite");
+        const objectStore = transaction.objectStore("members");
+        objectStore.put(memberAdd);
+        transaction.oncomplete = () => {
+          resolve(true);
+        };
+        transaction.onerror = (event) => {
+          console.log("ERROR: データ取得に失敗", event);
+          reject(new Error("ERROR: データ取得に失敗"));
+        };
+      });
+      return promise
     },
   },
 });

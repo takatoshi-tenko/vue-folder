@@ -5,7 +5,7 @@ import type { Member } from "@/interfaces";
 import { useMembersStore } from "@/stores/members";
 
 const router = useRouter();
-const membersStore = useMembersStore()
+const membersStore = useMembersStore();
 const member: Member = reactive({
   id: 0,
   name: "",
@@ -14,10 +14,15 @@ const member: Member = reactive({
   note: "",
 });
 const onAdd = (): void => {
-  // console.log(member);
-  membersStore.insertMember(member)
-  router.push({ name: "MemberList" });
-  // router.push({name: "MemberDetail", params: {id: member.id}});
+  const promise = membersStore.insertMember(member);
+  promise.then((result: boolean) => {
+    if (result) {
+      router.push({ name: "MemberList" });
+    }
+  });
+  promise.catch((error) => {
+    console.log("データ登録失敗", error);
+  });
 };
 </script>
 
