@@ -5,6 +5,32 @@ interface State {
   memberList: Map<number, Member>;
 }
 
+let _database: IDBDatabase;
+async function getDatabase(): Promise<IDBDatabase> {
+  const promise = new Promise<IDBDatabase>((resolve, reject): void => {
+    if (_database != undefined) {
+      resolve(_database);
+    } else {
+      const request = window.indexedDB.open("asyncdb", 1);
+      request.onupgradeneeded = (event) => {
+        const target = event.target as IDBRequest;
+        const database = target.result as IDBDatabase;
+        database.createObjectStore("members", { keyPath: "id" });
+      };
+      request.onsuccess = (event) => {
+        const target = event.target as IDBRequest;
+        _database = target.result as IDBDatabase;
+        resolve(_database);
+      };
+      request.onerror = (event) => {
+        console.log("ERROR: DBをオープンできません。", event);
+        reject(new Error("ERROR: DBをオープンできません。"));
+      };
+    }
+  });
+  return promise;
+}
+
 export const useMembersStore = defineStore({
   id: "members",
   state: (): State => {
@@ -20,8 +46,8 @@ export const useMembersStore = defineStore({
       };
     },
     isMemberListEmpty: (state): boolean => {
-      return state.memberList.size == 0
-    }
+      return state.memberList.size == 0;
+    },
   },
   actions: {
     prepareMemberList(): void {
@@ -34,9 +60,9 @@ export const useMembersStore = defineStore({
       this.memberList = memberList;
     },
     insertMember(member: Member): void {
-      this.memberList.set(member.id, member)
-      const memberListJSONStr = JSON.stringify([...this.memberList])
-      sessionStorage.setItem("memberList", memberListJSONStr)
-    }
+      this.memberList.set(member.id, member);
+      const memberListJSONStr = JSON.stringify([...this.memberList]);
+      sessionStorage.setItem("memberList", memberListJSONStr);
+    },
   },
 });
