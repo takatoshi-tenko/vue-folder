@@ -19,6 +19,9 @@ export const useMembersStore = defineStore({
         return member;
       };
     },
+    isMemberListEmpty: (state): boolean => {
+      return state.memberList.size == 0
+    }
   },
   actions: {
     initList(): void {
